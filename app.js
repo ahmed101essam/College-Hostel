@@ -7,6 +7,7 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("./models/User");
 const cors = require("cors");
+const adminRouter = require("./routes/adminRoutes");
 
 const app = express();
 app.use(express.json());
@@ -70,6 +71,7 @@ passport.deserializeUser(async (id, done) => {
 });
 app.use("/api/users", userRouter);
 app.use("/api/units", unitRouter);
+app.use("/api/admin", adminRouter);
 app.get("/", (req, res) => {
   res.send("<a href='/api/users/login/google'>login with google</a>");
 });
