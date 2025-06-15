@@ -28,6 +28,14 @@ exports.editRequest = catchAsync(async (req, res, next) => {
   if (!request) {
     return next(new AppError("No request found with that id", 404));
   }
+
+  if (req.body.status === "accepted") {
+    await Request.findByIdAndUpdate(
+      request.unit,
+      { status: "active", isVerified: true },
+      { new: true }
+    );
+  }
   res.status(200).json({
     status: "success",
     data: {
