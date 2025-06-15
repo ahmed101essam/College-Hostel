@@ -1,4 +1,5 @@
 const Unit = require("../models/Unit");
+const { $where } = require("../models/User");
 const APIFeatures = require("../utils/apiFeatures");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
@@ -7,7 +8,10 @@ const Email = require("../utils/email");
 exports.getAllUnits = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(
     Unit.find({
-      status: "active", // Exclude inactive units
+      status: "active",
+      description: {
+        $contains: req.body.search || "", // Allow searching in the description
+      }, // Exclude inactive units
     }),
     req.query
   )
