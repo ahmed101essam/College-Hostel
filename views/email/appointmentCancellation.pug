@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    style.
+      body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+      .container { max-width: 600px; background: #ffffff; padding: 20px; border-radius: 8px; }
+      .header { background: #ffcc00; color: white; padding: 10px; text-align: center; border-radius: 5px; }
+      .footer { font-size: 12px; color: #555; text-align: center; margin-top: 20px; }
+  body
+    .container
+      .header
+        h2 #{subject}
+      p Hello #{firstName},  
+      p The user <strong>#{user.name}</strong> has canceled their appointment for your unit <strong>#{unit.title}</strong>.
+      p Appointment Details:
+      ul
+        li 🔢 Appointment Number: #{appointment.appointmentNumber}
+        li 👤 Visitor: #{user.name} (#{user.email})
+        li 📅 Date: #{appointment.date}
+        li 🏠 Unit: #{unit.title}
+        li 📍 Location: #{unit.location}
+      p You can now accept other requests for this unit or reach out to the user if needed.
+      p Thank you for using CollegeHousing! 🏡
+      .footer
+        p &copy; 2025 CollegeHousing | CEO: Seif Shehab

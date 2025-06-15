@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    style.
+      body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+      .container { max-width: 600px; background: #ffffff; padding: 20px; border-radius: 8px; }
+      .header { background: #007bff; color: white; padding: 10px; text-align: center; border-radius: 5px; }
+      .footer { font-size: 12px; color: #555; text-align: center; margin-top: 20px; }
+  body
+    .container
+      .header
+        h2 #{subject}
+      p Hello #{firstName},  
+      p We have received your appointment request to visit <strong>#{unit.title}</strong> located at <strong>#{unit.location}</strong>. The owner will review your request and get back to you shortly.
+      p Appointment Details:
+      ul
+        li 🔢 Appointment Number: <strong>#{appointment.appointmentNumber}</strong>
+        li 📅 Date: #{appointment.date}
+        li 🏠 Unit: #{unit.title}
+        li 📍 Location: #{unit.location}
+      p You will be notified once the owner confirms your visit.
+      p Thank you for choosing CollegeHousing! 🏡
+      .footer
+        p &copy; 2025 CollegeHousing | CEO: Seif Shehab
