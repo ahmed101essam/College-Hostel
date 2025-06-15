@@ -9,9 +9,7 @@ exports.getAllUnits = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(
     Unit.find({
       status: "active",
-      description: {
-        $contains: req.body.search || "", // Allow searching in the description
-      }, // Exclude inactive units
+      description: { $regex: search, $options: "i" }, // Case-insensitive contains      }, // Exclude inactive units
     }),
     req.query
   )
