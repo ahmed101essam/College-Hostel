@@ -19,7 +19,7 @@ exports.getAllRequests = catchAsync(async (req, res, next) => {
 exports.editRequest = catchAsync(async (req, res, next) => {
   const request = await Request.findByIdAndUpdate(
     req.params.id,
-    { status: req.body.status, messages: { $push: req.body.message } },
+    { status: req.body.status, $push: { messages: req.body.message } },
     {
       new: true,
       runValidators: true,
