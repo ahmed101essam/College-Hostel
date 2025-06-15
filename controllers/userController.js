@@ -46,7 +46,7 @@ const updateMe = catchAsync(async (req, res, next) => {
 });
 
 const deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { status: "inactive"});
+  await User.findByIdAndUpdate(req.user.id, { status: "inactive" });
   await Unit.updateMany(
     { owner: req.user.id, status: "active" },
     { status: "inactive" }
@@ -92,9 +92,9 @@ const deleteUser = catchAsync(async (req, res, next) => {
 
 const getWishlist = catchAsync(async (req, res, next) => {
   const id = req.user._id;
-console.log("A&A");
+  console.log("A&A");
 
-  console.log(id)
+  console.log(id);
   const user = await User.findById(id).populate("favorites");
 
   res.status(200).json({
@@ -105,20 +105,19 @@ console.log("A&A");
   });
 });
 
-
 const addToWishlist = catchAsync(async (req, res, next) => {
   const id = req.body.unit;
 
   const unit = await Unit.findById(id);
 
-
-
   if (!unit) {
     return next(new AppError("This is not valid unit id", 400));
   }
 
-  if(unit.owner._id === req.user.id){
-    return next(new AppError("You cannot add your unit to favorites list",400))
+  if (unit.owner._id === req.user.id) {
+    return next(
+      new AppError("You cannot add your unit to favorites list", 400)
+    );
   }
 
   const user = await User.findByIdAndUpdate(
@@ -155,7 +154,7 @@ const deleteFromWishlist = catchAsync(async (req, res, next) => {
 });
 
 const suspendUser = catchAsync(async (req, res, next) => {
-  const id = req.user.id;
+  const id = req.params.id;
   const user = await User.findByIdAndUpdate(
     id,
     { status: "suspended" },
@@ -171,7 +170,9 @@ const suspendUser = catchAsync(async (req, res, next) => {
 });
 
 const getSuspendedUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find().setOptions({ byPassAdmin: true });
+  const users = await User.find({ status: "suspended" }).setOptions({
+    byPassAdmin: true,
+  });
   res.status(200).json({
     status: "success",
     data: {

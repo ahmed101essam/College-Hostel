@@ -165,9 +165,11 @@ exports.addUnit = catchAsync(async (req, res, next) => {
 });
 
 exports.verifyUnit = catchAsync(async (req, res, next) => {
-  const unit = await Unit.findById(req.params.unitId).setOptions({
-    byPassAdmin: true,
-  });
+  const unit = await Unit.findByIdAndUpdate(
+    req.params.unitId,
+    { isVerified: true },
+    { new: true, runValidators: true }
+  );
 
   if (!unit) {
     return next(new AppError("There is no unit found by that ID", 404));
