@@ -1,6 +1,7 @@
 const catchAsync = require("../utils/catchAsync");
 const Request = require("../models/Request");
 const AppError = require("../utils/appError");
+const Unit = require("../models/Unit");
 
 exports.getAllRequests = catchAsync(async (req, res, next) => {
   const requests = await Request.find()
@@ -30,8 +31,8 @@ exports.editRequest = catchAsync(async (req, res, next) => {
   }
 
   if (req.body.status === "accepted") {
-    await Request.findByIdAndUpdate(
-      request.unit,
+    await Unit.findByIdAndUpdate(
+      request.unit._id,
       { status: "active", isVerified: true },
       { new: true }
     );
