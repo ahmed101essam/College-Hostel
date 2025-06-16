@@ -9,7 +9,7 @@ exports.getAllUnits = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(
     Unit.find({
       status: "active",
-      description: { $regex: req.body.search, $options: "i" }, // Case-insensitive contains      }, // Exclude inactive units
+      description: { $regex: req.body.search || "", $options: "i" }, // Case-insensitive contains      }, // Exclude inactive units
     }),
     req.query
   )
