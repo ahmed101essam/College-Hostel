@@ -2,6 +2,7 @@ const express = require("express");
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const passport = require("passport");
+const { myRequests } = require("../controllers/requestsController");
 
 const userRouter = express.Router();
 
@@ -48,6 +49,7 @@ userRouter
     authController.restrictTo("admin"),
     userController.getAllUsers
   );
+userRouter.route("/my-requests").get(myRequests);
 userRouter
   .route("/favorites")
   .all(authController.protect)

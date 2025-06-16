@@ -17,6 +17,20 @@ exports.getAllRequests = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.myRequests = catchAsync(async (req, res, next) => {
+  const requests = await Request.find({ user: req.user.id })
+    .populate("unit", "name")
+    .populate("user", "name email");
+
+  res.status(200).json({
+    status: "success",
+    length: requests.length,
+    data: {
+      requests: requests,
+    },
+  });
+});
+
 exports.editRequest = catchAsync(async (req, res, next) => {
   const request = await Request.findByIdAndUpdate(
     req.params.id,
