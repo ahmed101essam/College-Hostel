@@ -49,7 +49,7 @@ userRouter
     authController.restrictTo("admin"),
     userController.getAllUsers
   );
-userRouter.route("/my-requests").get(myRequests);
+userRouter.route("/my-requests").get(authController.protect, myRequests);
 userRouter
   .route("/favorites")
   .all(authController.protect)
