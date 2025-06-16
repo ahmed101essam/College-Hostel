@@ -4,7 +4,7 @@ const AppError = require("../utils/appError");
 const Unit = require("../models/Unit");
 
 exports.getAllRequests = catchAsync(async (req, res, next) => {
-  const requests = await Request.find()
+  const requests = await Request.find({ status: { $ne: "accepted" } })
     .populate("unit", "name")
     .populate("user", "name email");
 
