@@ -54,7 +54,11 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 2) Check if user exists and password correct
-  const user = await User.findOne({ email: email }).select("+password");
+  const user = await User.findOne({ email: email })
+    .select("+password")
+    .setOptions({
+      byPassAdmin: true,
+    });
 
   if (user && user.status === "inactive") {
     user.status = "active";
