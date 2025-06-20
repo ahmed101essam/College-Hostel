@@ -102,8 +102,8 @@ const unitSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "inactive",
-      enum: ["active", "inactive", "suspended"],
+      default: "pending",
+      enum: ["active", "inactive", "suspended", "pending", "rejected"],
     },
   },
   {

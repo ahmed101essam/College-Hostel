@@ -51,6 +51,13 @@ exports.editRequest = catchAsync(async (req, res, next) => {
       { new: true }
     );
   }
+  if (req.body.status === "rejected") {
+    await Unit.findByIdAndUpdate(
+      request.unit._id,
+      { status: "rejected" },
+      { new: true }
+    );
+  }
   res.status(200).json({
     status: "success",
     data: {
