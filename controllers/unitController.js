@@ -237,7 +237,7 @@ exports.activateUnit = catchAsync(async (req, res, next) => {
 });
 
 exports.myUnits = catchAsync(async (req, res, next) => {
-  const units = await Unit.find({ owner: req.user.id, status: "active" });
+  const units = await Unit.find({ owner: req.user.id });
 
   if (units.length === 0) {
     return next(new AppError("You have no active units", 404));
