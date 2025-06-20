@@ -61,7 +61,7 @@ exports.login = catchAsync(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
   }
 
-  if (!user.verified) {
+  if (user && !user.verified) {
     return next(new AppError("You have to verify you email first", 401));
   }
 
