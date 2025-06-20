@@ -28,6 +28,24 @@ exports.getAllUnits = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getAllUnitsByAllStates = catchAsync(async (req, res, next) => {
+  const features = new APIFeatures(Unit.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate()
+    .search();
+
+  const units = await features.query;
+  res.status(200).json({
+    status: "success",
+    length: units.length,
+    data: {
+      units: units,
+    },
+  });
+});
+
 exports.owner = catchAsync(async (req, res, next) => {
   console.log(req.unit.owner);
 

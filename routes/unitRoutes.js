@@ -9,6 +9,7 @@ const {
   owner,
   validAndActiveUnit,
   myUnits,
+  getAllUnitsByAllStates,
 } = require("../controllers/unitController");
 const { unitUploadResize } = require("../middlewares/cloud");
 const upload = require("../utils/upload");

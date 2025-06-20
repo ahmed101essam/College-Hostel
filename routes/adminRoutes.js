@@ -23,7 +23,7 @@ adminRouter.route("/suspendedUsers").get(userController.getSuspendedUsers);
 
 adminRouter.route("/verifyUnit/:unitId").patch(unitController.verifyUnit);
 
-adminRouter.route("allUnits").get(unitController.getAllUnits);
+adminRouter.route("/allUnits").get(unitController.getAllUnitsByAllStates);
 
 adminRouter
   .route("unit/:id")
