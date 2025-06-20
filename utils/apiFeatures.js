@@ -58,6 +58,7 @@ class APIFeatures {
         description: { $regex: searchTerm || "", $options: "i" },
       });
     }
+    return this;
   }
 }
 module.exports = APIFeatures;
